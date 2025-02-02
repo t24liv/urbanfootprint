@@ -79,7 +79,7 @@ class BuiltForm(Name, Key, Tags, Deletable, Cloneable):
     medium_context = PickledObjectField(null=True)
 
     media = models.ManyToManyField(Medium, related_name="built_form_media")
-    examples = models.ManyToManyField(BuiltFormExample, null=True)
+    examples = models.ManyToManyField(BuiltFormExample)
     # The user who created the config_entity
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,

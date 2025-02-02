@@ -26,7 +26,7 @@ class Geography(models.Model):
     # An identifier that uniquely identifies the source table that provided these geographies.
     source_table_id = models.IntegerField(null=False, db_index=True)
     # An identifier that uniquely a row from the source table, usually its id
-    source_id = models.IntegerField(null=False, db_index=True, max_length=200)
+    source_id = models.IntegerField(null=False, db_index=True)
 
     class Meta(object):
         abstract = (True,)

@@ -24,7 +24,8 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 CLIENT = None
 
@@ -76,7 +77,8 @@ API_VERSION = 1
 API_PATH = "/footprint/api/v{0}".format(API_VERSION)
 
 PYTHON_INTERPRETER = os.path.join(INSTALL_LOCATION, "calthorpe_env/bin/python")
-GIT_ROOT = os.path.join(INSTALL_LOCATION, "calthorpe")
+#GIT_ROOT = os.path.join(INSTALL_LOCATION, "calthorpe")
+GIT_ROOT = os.path.join(INSTALL_LOCATION)
 ROOT_PATH = os.path.join(GIT_ROOT, "urbanfootprint")
 WEBSOCKETS_ROOT = os.path.join(ROOT_PATH, "websockets")
 
@@ -150,20 +152,39 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "$z7yrc#(il44#+y8y2gwfv8g8u%b+gx!pv16q9%@5l=jl9zx6p"
 
+#TEMPLATES = [
+#    {
+#        "BACKEND": "django.template.backends.django.DjangoTemplates",
+#        "DIRS": [],
+#        "APP_DIRS": True,
+#        "OPTIONS": {
+#            "context_processors": [
+#                "django.contrib.auth.context_processors.auth",
+#                "django.core.context_processors.debug",
+#                "django.core.context_processors.i18n",
+#                "django.core.context_processors.media",
+#                "django.template.context_processors.request",
+#                "django.contrib.messages.context_processors.messages",
+#                "django.core.context_processors.static",
+#            ],
+#        },
+#    },
+#]
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'footprint/main/templates')],  # Ensure the directory is included
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.contrib.auth.context_processors.auth",
-                "django.core.context_processors.debug",
-                "django.core.context_processors.i18n",
-                "django.core.context_processors.media",
-                "django.template.context_processors.request",
+                "django.template.context_processors.debug",  # Updated import path
+                "django.template.context_processors.i18n",  # Updated import path
+                "django.template.context_processors.media",  # Updated import path
+                "django.template.context_processors.request",  # Updated import path
                 "django.contrib.messages.context_processors.messages",
-                "django.core.context_processors.static",
+                "django.template.context_processors.static",  # Updated import path
             ],
         },
     },

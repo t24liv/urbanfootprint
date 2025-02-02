@@ -10,11 +10,11 @@
 # Public License v3 for more details; see <http://www.gnu.org/licenses/>.
 
 
-from django.urls import path as url
+from django.urls import path
 
 from footprint.main.admin.views import ufadmin, config_entities
 
 urlpatterns = [
-    url(r"^$", ufadmin),
-    url(r"^config_entity", config_entities),
+    path("", ufadmin),  # Root URL
+    path("config_entity/", config_entities),  # Added trailing slash for consistency
 ]

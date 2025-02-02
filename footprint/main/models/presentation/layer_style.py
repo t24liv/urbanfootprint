@@ -38,7 +38,7 @@ class LayerStyle(Medium):
     geometry_type = models.CharField(max_length=200, null=True, blank=True)
     html_class = models.CharField(max_length=200, null=True, blank=True)
 
-    style_attributes = models.ManyToManyField('StyleAttribute', null=True)
+    style_attributes = models.ManyToManyField('StyleAttribute')
 
     @property
     def defined_attributes(self):

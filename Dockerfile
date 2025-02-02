@@ -13,7 +13,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-
 # webserver
 RUN apt-get update && apt-get install -y \
         build-essential \
@@ -57,3 +56,5 @@ RUN pip install -U -r requirements.txt
 
 ADD . /opt/urbanfootprint
 # CMD ["/sbin/my_init"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["tail", "-f", "/dev/null"]

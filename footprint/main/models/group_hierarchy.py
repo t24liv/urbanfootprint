@@ -32,7 +32,7 @@ class GroupHierarchy(models.Model):
     # The corresponding global Group of this Group (e.g. Manager for Foo_Manager) and
     # The parent ConfigEntity Groups of this Group (e.g. Foo_Manager and Foo_User for Bar_User if Bar is Foo's child
     # ConfigEntity
-    superiors = ManyToManyField("auth.Group", related_name="subordinates", null=True)
+    superiors = ManyToManyField("auth.Group", related_name="subordinates")
     # Used for Groups scoped to ConfigEntities. Each ConfigEntity has one or more Groups
     # automatically created for it, except for GlobalConfig which uses the the global Admin Group
     config_entity = ForeignKey(

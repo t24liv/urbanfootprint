@@ -75,7 +75,7 @@ class ConfigEntity(
         on_delete=models.SET_NULL,
     )
 
-    media = models.ManyToManyField("Medium", null=True)
+    media = models.ManyToManyField("Medium")
 
     # Use parent_config_entity_subclassed to get the actual subclass, not a generic config_entity instance
     parent_config_entity = models.ForeignKey(

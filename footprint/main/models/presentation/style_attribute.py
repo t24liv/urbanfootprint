@@ -29,7 +29,7 @@ class StyleAttribute(models.Model):
     attribute = models.CharField(max_length=200, null=True, blank=True)
     style_type = models.CharField(max_length=40, null=True, blank=True)
     opacity = models.FloatField(default=1)
-    style_value_contexts = PickledObjectField(default=[])
+    style_value_contexts = PickledObjectField(default=list)
 
     visible = models.BooleanField(default=False)
 

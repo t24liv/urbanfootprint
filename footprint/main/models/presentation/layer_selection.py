@@ -122,7 +122,7 @@ class LayerSelection(Name, FeatureFieldMixin):
     # The ordered list of field names matching the summary results
     summary_fields = PickledObjectField(null=True)
     # A lookup from the field name to a human readable title
-    summary_field_title_lookup = PickledObjectField(null=True, default={})
+    summary_field_title_lookup = PickledObjectField(null=True, default=dict)
 
     # The sql used to create the results, for exporting and debugging
     query_sql = TextField(null=True)

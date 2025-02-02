@@ -10,7 +10,7 @@
 # Public License v3 for more details; see <http://www.gnu.org/licenses/>.
 
 
-from django.urls import include, path as url
+from django.urls import path, re_path, include
 from django.views.generic import TemplateView
 from django.conf import settings
 
@@ -27,37 +27,35 @@ from footprint.upload_manager.views import upload, upload_test, upload_results
 from footprint.main.views import get_project_data, get_scenario_data
 
 urlpatterns = [
-    url(r"^$", TemplateView.as_view(template_name="footprint/index.html")),
-    url(r"^(?P<api_key>[^/]+)/export_layer/(?P<layer_id>[^/]+)", export_layer),
-    url(r"^(?P<api_key>[^/]+)/get_export_result/(?P<hash_id>[^/]+)", get_export_result),
-    url(
-        r"^(?P<api_key>[^/]+)/export_query_results/(?P<layer_selection_unique_id>[^/]+)",
-        export_query_results,
-    ),
-    url(
-        r"^(?P<api_key>[^/]+)/export_query_summary/(?P<layer_selection_unique_id>[^/]+)",
-        export_query_summary,
-    ),
-    url(
-        r"^(?P<api_key>[^/]+)/export_result_table/(?P<result_id>[^/]+)",
-        export_result_table,
-    ),
+    path("", TemplateView.as_view(template_name="footprint/admin/index.html")),
+
+    # Export URLs with dynamic parameters
+    path("<str:api_key>/export_layer/<str:layer_id>/", export_layer),
+    path("<str:api_key>/get_export_result/<str:hash_id>/", get_export_result),
+    path("<str:api_key>/export_query_results/<str:layer_selection_unique_id>/", export_query_results),
+    path("<str:api_key>/export_query_summary/<str:layer_selection_unique_id>/", export_query_summary),
+    path("<str:api_key>/export_result_table/<str:result_id>/", export_result_table),
+
     # User Management
-    url(r"^users/$", users),
-    url(r"^user/(?P<user_id>\d*)", user),
-    url(r"^add_user/$", add_user),
+    path("users/", users),
+    path("user/<int:user_id>/", user),  # Converted `\d*` to `<int:user_id>` (assuming ID is numeric)
+    path("add_user/", add_user),
+
     # Authentication
-    url(r"^logout/$", logout),
-    url(r"^login/$", login),
+    path("logout/", logout),
+    path("login/", login),
+
     # Administration
-    url(r"^ufadmin/", include("footprint.main.admin.urls")),
+    path("ufadmin/", include("footprint.main.admin.urls")),
+
     # File Upload
-    url(r"^upload/", upload),
-    url(r"^upload_test/", upload_test),
-    url(r"^upload_results/", upload_results),
-    # Manual API urls
-    url(r"^api/v2/project/", get_project_data),
-    url(r"^api/v2/scenario/", get_scenario_data),
+    path("upload/", upload),
+    path("upload_test/", upload_test),
+    path("upload_results/", upload_results),
+
+    # API URLs
+    path("api/v2/project/", get_project_data),
+    path("api/v2/scenario/", get_scenario_data),
 ]
 # Cross-domain proxying if we need it
 # urlpatterns += patterns('',
