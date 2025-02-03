@@ -13,10 +13,27 @@ UrbanFootprint is developed by [Calthorpe Analytics](http://calthorpeanalytics.c
 
 ## To run the docker containers:
 
-1- Download the db dump from https://s3-us-west-2.amazonaws.com/uf-provisioning/urbanfootprint-sacog-web-db.sql.gz
+1- Download the db dump from [here](https://s3-us-west-2.amazonaws.com/uf-provisioning/urbanfootprint-sacog-web-db.sql.gz)
 
 2- Extract the .sql file and place it in db-init folder
 
 3- rename the file to z_dump.sql
 
-4- in a terminal, execute  ```````
+4- run docker-compose in a terminal
+```bash
+docker-compose up db --build -d
+```
+```bash
+docker-compose up web --build -d
+```
+
+
+UrbanFootprint quickstart is complete. Open your web browser to:
+
+http://localhost:8000
+
+using the following default credentials:
+
+user: admin@urbanfootprint.net
+
+pass: admin@uf
