@@ -55,4 +55,4 @@ SQL_PATH = "/srv/calthorpe/urbanfootprint/calthorpe/server/footprint/main/static
 from footprint import uf_logging
 uf_logging.set_up(DEBUG)
 
-MIDDLEWARE_CLASSES = ('footprint.profile.ProfilingMiddleware',) + MIDDLEWARE_CLASSES
+MIDDLEWARE_CLASSES = ('footprint.profile.ProfilingMiddleware',)

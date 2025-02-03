@@ -10,3 +10,4 @@ django-model-utils
 django-reversion
 geojson
 fiona
+tzdata

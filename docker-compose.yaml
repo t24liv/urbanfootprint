@@ -11,13 +11,16 @@ services:
       POSTGRES_DB: uf
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+      - ./db-init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db-init/z_dump.sql:/docker-entrypoint-initdb.d/z_dump.sql
+
 
   web:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: uf-web
-    environment: 
+    environment:
       DATABASE_URL: postgis://postgres:postgres@db/uf
     volumes:
       - .:/opt/urbanfootprint

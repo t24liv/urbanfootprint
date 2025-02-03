@@ -64,7 +64,7 @@ USE_SAMPLE_DATA_SETS = False
 DEV = False
 
 # Set the source for built form imports, or don't import them at all
-IMPORT_BUILT_FORMS = "JSON"  # set to 'CSV' to run full import, 'JSON' to use fixtures, or 'FALSE' to skip import
+IMPORT_BUILT_FORMS = "CSV"  # set to 'CSV' to run full import, 'JSON' to use fixtures, or 'FALSE' to skip import
 # Skip slow calculations for testing
 SKIP_ALL_BUILT_FORMS = False
 TEST_SKIP_BUILT_FORM_COMPUTATIONS = False
@@ -107,7 +107,7 @@ else:
 
 CALTHORPE_ENGINE_PATH = os.path.join(ROOT_PATH, "engines")
 
-TIME_ZONE = "America/Los_Angeles"
+TIME_ZONE = "America/Chicago"
 USE_TZ = True
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html

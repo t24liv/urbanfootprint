@@ -30,6 +30,6 @@ def show_urls(urllist=urlpatterns, depth=0):
         queue.put(entry)
     while not queue.empty():
         entry = queue.get()
-        print "{0} - {1}".format("  " * depth, entry.regex.pattern)
+        print("{0} - {1}".format("  " * depth, entry.regex.pattern))
         if hasattr(entry, 'url_patterns'):
             show_urls(entry.url_patterns, depth + 1)

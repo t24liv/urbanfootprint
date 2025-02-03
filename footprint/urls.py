@@ -10,10 +10,11 @@
 # Public License v3 for more details; see <http://www.gnu.org/licenses/>.
 
 
-from django.urls import include, path, include
+from django.urls import include, path, include, re_path
 from django.contrib import admin
 from django.conf import settings
 from django.views.generic import RedirectView
+from django.views.static import serve
 
 admin.autodiscover()
 
@@ -21,12 +22,18 @@ urlpatterns = []
 
 if settings.DEBUG:
     urlpatterns += [
+        re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.STATIC_DOC_ROOT}),
+    ]
+    """
+    urlpatterns += [
         (
             r"^media/(?P<path>.*)$",
             "django.views.static.serve",
             {"document_root": settings.STATIC_DOC_ROOT},
         ),
-    ]
+    ]    
+    """
+
 
 urlpatterns += [
     # ('^$', redirect_to,  {'url': '/main/', 'permanent': False}),

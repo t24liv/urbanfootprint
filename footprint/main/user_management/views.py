@@ -443,7 +443,7 @@ def login(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
-        output = request.REQUEST.get('output')
+        output = request.POST.get('output')
 
         if not email or not password:
             if output == 'json':

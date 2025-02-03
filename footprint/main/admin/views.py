@@ -29,7 +29,7 @@ def admin_required(f):
     @wraps(f)
     def chck(request, *args, **kwds):
         """Simple decorator to guarantee the user is logged in as staff/admin."""
-        if request.user.is_authenticated() and request.user.is_staff:
+        if request.user.is_staff:
             return f(request, *args, **kwds)
         messages.error(request, "")
         return HttpResponseNotAllowed(["GET"])

@@ -83,3 +83,10 @@ newrelic.ini
 # needs Buildfile for sproutcore's build/serve
 sproutcore/frameworks/bower_components/*/*
 !sproutcore/frameworks/bower_components/*
+
+# database dumps
+db-init/z_dump.sql
+urbanfootprint-sacog-web-db.sql
+urbanfootprint-sacog-source-db.sql
+urbanfootprint-sacog-web-db.sql.tz
+urbanfootprint-sacog-source-db.sql.tz
