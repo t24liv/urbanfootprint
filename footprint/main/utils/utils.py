@@ -787,11 +787,11 @@ def reklass_model(model_instance, model_subklass):
     :return:
     """
 
-    fields = model_instance._meta.get_all_field_names()
+    fields = model_instance._meta.get_fields()
     kwargs = {}
-    for field_name in fields:
+    for field in fields:
         try:
-            kwargs[field_name] = getattr(model_instance, field_name)
+            kwargs[field.name] = getattr(model_instance, field.name)
         except ValueError as e:
             # needed for ManyToManyField for not already saved instances
             pass

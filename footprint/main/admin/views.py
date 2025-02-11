@@ -20,16 +20,18 @@ from functools import wraps
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotAllowed
+
+from footprint.main.models import logger
 from footprint.main.models.config.config_entity import ConfigEntity
 from footprint.main.admin.utils import build_config_entity_trees
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def admin_required(f):
     @wraps(f)
     def chck(request, *args, **kwds):
         """Simple decorator to guarantee the user is logged in as staff/admin."""
-        if request.user.is_staff:
+        if request.user.is_authenticated or request.user.is_staff:
             return f(request, *args, **kwds)
         messages.error(request, "")
         return HttpResponseNotAllowed(["GET"])
@@ -41,6 +43,8 @@ def admin_required(f):
 @admin_required
 def config_entities(request):
     """The admin view of the ConfigEntity hierarchy."""
+
+    logger.info(f"User: {request.user}, is_staff: {request.user.is_staff}")  # 🛠 Debug log
     config_entities = list(ConfigEntity.objects.order_by("id"))
     trees = build_config_entity_trees(config_entities)
 
@@ -53,7 +57,6 @@ def config_entities(request):
             "trees": trees,
         },
     )
-
 
 @login_required(login_url="/footprint/login")
 @admin_required

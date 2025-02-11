@@ -16,12 +16,13 @@ import json
 def make_json_obj(model):
     """Turn a django model into a JSON-serializable dictionary."""
     obj = {}
-    for field_name in model._meta.get_all_field_names():
+    for field in model._meta.get_fields():
+        field_name = field.name
         try:
             value = getattr(model, field_name, None)
             if value is not None:
-                if not isinstance(value, (int, float, bool, basestring)):
-                    value = unicode(value)
+                if not isinstance(value, (int, float, bool, str)):
+                    value = str(value)
                 obj[field_name] = value
         except:
             # Ignore attribute errors, this is only for debugging
